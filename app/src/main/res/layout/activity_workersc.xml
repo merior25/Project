@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:gravity="center"
+    android:layoutDirection="rtl"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/greetingTextWorker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="שלום, "
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginBottom="40dp" />
+
+    <Button
+        android:id="@+id/btnNoExperience"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="עבודות ללא ניסיון"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#000000"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnMoreBusinesses"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="צפייה בעסקים נוספים"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#000000"
+        android:layout_marginBottom="16dp"
+        />
+
+
+    <Button
+        android:id="@+id/btnUpResume"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="העלאת קורות חיים"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#000000"
+        android:layout_marginBottom="16dp"
+        />
+
+    <CheckBox
+        android:id="@+id/checkboxIsEmployed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="אני מועסק כרגע"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
+</LinearLayout>

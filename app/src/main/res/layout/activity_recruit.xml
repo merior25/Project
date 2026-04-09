@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layoutDirection="rtl"
+    android:background="#EBF5FB"> <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="לוח גיוס עובדים"
+    android:textSize="28sp"
+    android:textStyle="bold"
+    android:textColor="#111827"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="24dp"
+    android:gravity="center" />
+
+    <ListView
+        android:id="@+id/workersListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/input_bg_solid"
+        android:elevation="2dp"
+        android:divider="#E5E7EB"
+        android:dividerHeight="1dp"
+        android:padding="8dp"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:id="@+id/foundWorkerStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_bg_solid"
+        android:elevation="1dp"
+        android:padding="12dp"
+        android:textColor="#374151"
+        android:textSize="15sp"
+        android:gravity="right"
+        android:layout_marginBottom="8dp"
+        android:text="סטטוס עובדים שנמצאו" />
+
+    <TextView
+        android:id="@+id/candidateStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_bg_solid"
+        android:elevation="1dp"
+        android:padding="12dp"
+        android:textColor="#374151"
+        android:textSize="15sp"
+        android:gravity="right"
+        android:layout_marginBottom="8dp"
+        android:text="סטטוס מועמדים" />
+
+    <TextView
+        android:id="@+id/recruitStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/input_bg_solid"
+        android:elevation="1dp"
+        android:padding="12dp"
+        android:textColor="#374151"
+        android:textSize="15sp"
+        android:gravity="right"
+        android:layout_marginBottom="24dp"
+        android:text="סטטוס גיוס כללי" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEdit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="עריכת הגיוס"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#111827"
+        app:cornerRadius="30dp"
+        android:layout_marginBottom="12dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClose"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="סגירת הגיוס"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#374151"
+        app:cornerRadius="30dp"
+        android:layout_marginBottom="16dp" />
+
+</LinearLayout>
