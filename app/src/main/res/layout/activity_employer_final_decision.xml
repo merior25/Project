@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layoutDirection="rtl"
+    android:gravity="center"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="החלטה סופית"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#111827"
+        android:gravity="center"
+        android:layout_marginBottom="24dp"/>
+
+    <TextView
+        android:id="@+id/tvCandidateNameFinal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#333333"
+        android:gravity="center"
+        android:layout_marginBottom="40dp"
+        android:text="טוען פרטי מועמד..."/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnHireCandidate"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="קבל לעבודה!"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#4CAF50"
+        app:cornerRadius="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnRejectCandidate"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:text="דחה מועמד"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#F44336"
+        app:cornerRadius="16dp"
+        android:layout_marginBottom="24dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="חזור מבלי להחליט בינתיים"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#9E9E9E"
+        app:cornerRadius="30dp" />
+
+</LinearLayout>

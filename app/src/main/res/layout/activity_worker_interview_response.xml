@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:layoutDirection="rtl"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="פרטי הראיון שהוצעו"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#111827"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/tvInterviewDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#333333"
+            android:background="#F8F9FA"
+            android:padding="16dp"
+            android:elevation="2dp"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="לא מתאים? הצע מועד חלופי:"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#111827"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etNewDate"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="תאריך חלופי (לחץ לבחירה)"
+            android:background="#F0F0F0"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp"
+            android:focusable="false"
+            android:clickable="true" />
+
+        <EditText
+            android:id="@+id/etNewTime"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="שעה חלופית (לחץ לבחירה)"
+            android:background="#F0F0F0"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp"
+            android:focusable="false"
+            android:clickable="true" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAcceptInterview"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="אשר את הראיון!"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#4CAF50"
+            app:cornerRadius="12dp"
+            android:layout_marginBottom="12dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnProposeNew"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="שלח מועד חלופי למעסיק"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#2196F3"
+            app:cornerRadius="12dp"
+            android:layout_marginBottom="12dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDecline"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="דחה ראיון לחלוטין"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            app:backgroundTint="#F44336"
+            app:cornerRadius="12dp" />
+
+    </LinearLayout>
+</ScrollView>

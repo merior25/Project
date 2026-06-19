@@ -39,8 +39,10 @@ public class EmployerSetupScreen extends AppCompatActivity {
         spinnerBusinessCategory = findViewById(R.id.spinnerBusinessCategory);
         btnSaveBusinessProfile = findViewById(R.id.btnSaveBusinessProfile);
 
-        String[] categories = {"בחר תחום עסק...", "מסעדות ובתי קפה", "אבטחה ושמירה", "ניקיון ואחזקה", "אירועים והפקות", "מכירות וקמעונאות", "מלונאות ותיירות", "אחר"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categories);
+        // טעינת הרשימה המשותפת מתוך קובץ ה-strings.xml אל תוך הספינר
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.shared_job_fields, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerBusinessCategory.setAdapter(adapter);
 
         btnSaveBusinessProfile.setOnClickListener(v -> saveBusinessProfile());
@@ -52,7 +54,8 @@ public class EmployerSetupScreen extends AppCompatActivity {
         String description = editBusinessDescription.getText().toString().trim();
         String category = spinnerBusinessCategory.getSelectedItem().toString();
 
-        if (name.isEmpty() || location.isEmpty() || category.equals("בחר תחום עסק...")) {
+        // בדיקה שמבוססת על המיקום (0) במקום על הטקסט המדויק
+        if (name.isEmpty() || location.isEmpty() || spinnerBusinessCategory.getSelectedItemPosition() == 0) {
             Toast.makeText(this, "נא למלא את שם העסק, מיקום ותחום", Toast.LENGTH_SHORT).show();
             return;
         }

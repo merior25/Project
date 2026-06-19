@@ -3,4 +3,12 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
+    <string-array name="shared_job_fields">
+        <item>בחר תחום עיסוק...</item>
+        <item>מסעדנות וברים</item>
+        <item>אבטחה ושמירה</item>F
+        <item>מכירות ושירות לקוחות</item>
+        <item>ניקיון ואחזקה</item>
+        <item>לוגיסטיקה ומחסן</item>
+    </string-array>
 </resources>

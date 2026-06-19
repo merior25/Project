@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layoutDirection="rtl"
+    android:background="#EBF5FB">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="עריכת גיוס"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#111827"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:gravity="center" />
+
+    <EditText
+        android:id="@+id/editNumWorkers"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="מספר עובדים דרושים"
+        android:inputType="number"
+        android:background="#FFFFFF"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"/>
+
+    <EditText
+        android:id="@+id/editRequirements"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="דרישות התפקיד"
+        android:gravity="top|start"
+        android:inputType="textMultiLine"
+        android:background="#FFFFFF"
+        android:padding="12dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="עובדים שהוזמנו (לחץ על עובד כדי להסיר):"
+        android:textColor="#374151"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <ListView
+        android:id="@+id/invitedWorkersListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        android:layout_marginBottom="20dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSaveChanges"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="שמור שינויים"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#4CAF50"
+        app:cornerRadius="30dp"
+        android:layout_marginBottom="12dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDeleteRecruit"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="מחק גיוס זה"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#F44336"
+        app:cornerRadius="30dp" />
+
+</LinearLayout>

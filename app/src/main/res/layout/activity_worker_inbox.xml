@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:layoutDirection="rtl"
+    android:background="#F8F9FA">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="הצעות העבודה שלי"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#111827"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="לחץ על הצעה כדי לאשר או לדחות אותה"
+        android:textSize="16sp"
+        android:textColor="#555555"
+        android:layout_marginBottom="24dp"
+        android:gravity="center" />
+
+    <ListView
+        android:id="@+id/workerInboxListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        android:padding="8dp"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/btnBackFromWorkerInbox"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="חזרה למסך הראשי"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#333333"
+        android:layout_marginBottom="16dp" />
+
+</LinearLayout>

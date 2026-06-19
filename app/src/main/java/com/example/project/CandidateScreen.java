@@ -9,30 +9,32 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CandidateScreen extends AppCompatActivity {
 
-    // הגדרת משתני המסך
     private TextView tvCandidateName, tvCandidateAge, tvCandidateExperience, tvCandidateRole, tvCandidatePhone;
-    private Button btnDownloadCV, btnRecruit;
+    private Button btnDownloadCV, btnRecruit, btnInviteCandidate;
 
-    // משתני פיירבייס
     private FirebaseFirestore db;
-    private String candidateId; // ה-ID של המועמד הספציפי שאנחנו רוצים להציג
-    private String cvDownloadUrl = ""; // הקישור לקורות החיים שלו (אם יש)
+    private FirebaseAuth mAuth;
+    private String candidateId;
+    private String jobId;
+    private String cvDownloadUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // ודאי ששם קובץ ה-XML תואם לשם שלך
         setContentView(R.layout.activity_candidate_screen);
 
-        // אתחול פיירבייס
         db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
-        // קישור המשתנים לעיצוב (לפי ה-IDs החדשים שעשינו)
         tvCandidateName = findViewById(R.id.tvCandidateName);
         tvCandidateAge = findViewById(R.id.tvCandidateAge);
         tvCandidateExperience = findViewById(R.id.tvCandidateExperience);
@@ -41,26 +43,28 @@ public class CandidateScreen extends AppCompatActivity {
 
         btnDownloadCV = findViewById(R.id.btnDownloadCV);
         btnRecruit = findViewById(R.id.btnRecruit);
+        btnInviteCandidate = findViewById(R.id.btnInviteCandidate);
 
-        // קבלת ה-ID של המועמד מהמסך הקודם (כדי שנדע את מי להציג)
-        // אם לא הועבר ID, נשתמש במשהו ריק כדי למנוע קריסה
+        // קבלת מזהה העובד ומזהה המשרה מהמסך הקודם
         candidateId = getIntent().getStringExtra("CANDIDATE_ID");
+        jobId = getIntent().getStringExtra("JOB_ID");
 
         if (candidateId != null && !candidateId.isEmpty()) {
             loadCandidateData();
         } else {
             Toast.makeText(this, "שגיאה: לא התקבל מזהה מועמד", Toast.LENGTH_SHORT).show();
+            finish();
         }
 
-        // מה קורה כשלוחצים על חזרה אחורה?
-        btnRecruit.setOnClickListener(v -> {
-            finish(); // סוגר את המסך הנוכחי וחוזר לקודם
-        });
+        // שליחת זימון לעובד
+        btnInviteCandidate.setOnClickListener(v -> sendInvitation());
 
-        // מה קורה כשלוחצים על הורדת קורות חיים?
+        // כפתור חזרה אחורה
+        btnRecruit.setOnClickListener(v -> finish());
+
+        // הורדת קורות חיים
         btnDownloadCV.setOnClickListener(v -> {
             if (!cvDownloadUrl.isEmpty()) {
-                // פותח את הקישור של ה-PDF בדפדפן של הטלפון
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(cvDownloadUrl));
                 startActivity(browserIntent);
             } else {
@@ -70,25 +74,21 @@ public class CandidateScreen extends AppCompatActivity {
     }
 
     private void loadCandidateData() {
-        // שולפים את המידע מאוסף "Users" לפי ה-ID של המועמד
         db.collection("Users").document(candidateId)
                 .get()
                 .addOnSuccessListener(documentSnapshot -> {
                     if (documentSnapshot.exists()) {
-                        // שולפים את הנתונים מפיירבייס (וודאי שהשמות פה תואמים לשמות ששמרת בפיירבייס!)
                         String firstName = documentSnapshot.getString("firstName");
                         String lastName = documentSnapshot.getString("lastName");
-                        String age = documentSnapshot.getString("age"); // בהנחה ששמרת כטקסט, אם זה מספר נשנה את זה
+                        String age = documentSnapshot.getString("age");
                         String experience = documentSnapshot.getString("experience");
-                        String role = documentSnapshot.getString("jobType"); // או איך שקראת לשדה התפקיד
+                        String role = documentSnapshot.getString("fieldOfWork"); // התיקון שלנו: שולפים את התפקיד מ-fieldOfWork
                         String phone = documentSnapshot.getString("phone");
 
-                        // שמירת הקישור לקורות חיים למשתנה שלנו (כדי שהכפתור יוכל להשתמש בו)
                         if (documentSnapshot.contains("cvUrl")) {
                             cvDownloadUrl = documentSnapshot.getString("cvUrl");
                         }
 
-                        // מכניסים את הנתונים למסך
                         tvCandidateName.setText("שם המועמד: " + firstName + " " + lastName);
                         tvCandidateAge.setText("גיל: " + (age != null ? age : "לא צוין"));
                         tvCandidateExperience.setText("שנות ניסיון: " + (experience != null ? experience : "לא צוין"));
@@ -99,8 +99,27 @@ public class CandidateScreen extends AppCompatActivity {
                         Toast.makeText(CandidateScreen.this, "המועמד לא נמצא במערכת", Toast.LENGTH_SHORT).show();
                     }
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(CandidateScreen.this, "שגיאה בטעינת נתונים: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(e -> Toast.makeText(CandidateScreen.this, "שגיאה בטעינת נתונים: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+    }
+
+    private void sendInvitation() {
+        if (mAuth.getCurrentUser() == null || jobId == null) {
+            Toast.makeText(this, "שגיאה: חסרים נתוני משרה או מעסיק", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Map<String, Object> invitation = new HashMap<>();
+        invitation.put("jobId", jobId);
+        invitation.put("employerId", mAuth.getCurrentUser().getUid());
+        invitation.put("workerId", candidateId);
+        invitation.put("status", "pending");
+
+        db.collection("Invitations").add(invitation)
+                .addOnSuccessListener(documentReference -> {
+                    Toast.makeText(CandidateScreen.this, "הזימון נשלח בהצלחה!", Toast.LENGTH_LONG).show();
+                    btnInviteCandidate.setText("זימון נשלח");
+                    btnInviteCandidate.setEnabled(false);
+                })
+                .addOnFailureListener(e -> Toast.makeText(CandidateScreen.this, "שגיאה בשליחת הזימון", Toast.LENGTH_SHORT).show());
     }
 }
