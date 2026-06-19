@@ -13,6 +13,30 @@
         android:theme="@style/Theme.Project"
         tools:targetApi="31">
         <activity
+            android:name=".EmployerFinalDecisionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WorkerInterviewResponseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmployerArrangeInterviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmployerScheduledInterviewsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WorkerInboxActivity"
+            android:exported="false" />
+        <activity
+            android:name=".WorkerSetupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmployerInboxActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditRecruitActivity"
+            android:exported="false" />
+        <activity
             android:name=".EmployerSetupScreen"
             android:exported="false" />
         <activity

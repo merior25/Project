@@ -56,7 +56,7 @@ public class RegisterScreen extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            // התיקון הקריטי: שומרים את המשתמש תחת ה-UID המדויק שלו מ-Auth
+                            // שומרים את המשתמש תחת ה-UID המדויק שלו מ-Auth
                             String userId = mAuth.getCurrentUser().getUid();
 
                             Map<String, Object> userDetails = new HashMap<>();
@@ -67,21 +67,23 @@ public class RegisterScreen extends AppCompatActivity {
                             userDetails.put("email", email);
                             userDetails.put("password", password);
 
-                            // אם זה עסק, נגדיר לו מראש שהפרופיל עוד לא הושלם
                             if (userType.equals("עסק")) {
                                 userDetails.put("isProfileComplete", false);
+                            } else {
+                                // גם לעובד אפשר לשמור שהוא טרם סיים את הגדרת הפרופיל
+                                userDetails.put("setupCompleted", false);
                             }
 
                             db.collection("Users").document(userId).set(userDetails)
                                     .addOnCompleteListener(dbTask -> {
                                         Intent intent;
                                         if (userType.equals("עסק")) {
-                                            // מעסיק חדש נשלח ישר למסך השאלון!
                                             intent = new Intent(RegisterScreen.this, EmployerSetupScreen.class);
                                         } else {
-                                            intent = new Intent(RegisterScreen.this, workersc.class);
+                                            // התיקון שלנו: מפנים למסך השאלון במקום לעמוד הראשי!
+                                            intent = new Intent(RegisterScreen.this, WorkerSetupActivity.class);
                                         }
-                                        intent.putExtra("USER_NAME", firstName);
+                                        intent.putExtra("USER_NAME", firstName); // שומרים את השם כדי להעביר הלאה
                                         startActivity(intent);
                                         finish();
                                     });

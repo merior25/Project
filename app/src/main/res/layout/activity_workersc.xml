@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="32dp"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:layoutDirection="rtl"
     android:background="#FFFFFF">
 
@@ -16,7 +17,53 @@
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="#000000"
-        android:layout_marginBottom="40dp" />
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="16dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCurrentJob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="#E8F5E9">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="העבודה הנוכחית שלי 🎉"
+                android:textStyle="bold"
+                android:textColor="#2E7D32"
+                android:textSize="18sp"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/tvJobDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:text="טוען פרטים..."/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/btnWorkerInbox"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="תיבת הצעות עבודה (זימונים)"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#4CAF50"
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/btnNoExperience"
@@ -36,9 +83,7 @@
         android:textSize="18sp"
         android:textColor="#FFFFFF"
         android:backgroundTint="#000000"
-        android:layout_marginBottom="16dp"
-        />
-
+        android:layout_marginBottom="16dp" />
 
     <Button
         android:id="@+id/btnUpResume"
@@ -48,15 +93,23 @@
         android:textSize="18sp"
         android:textColor="#FFFFFF"
         android:backgroundTint="#000000"
-        android:layout_marginBottom="16dp"
-        />
+        android:layout_marginBottom="24dp" />
 
-    <CheckBox
-        android:id="@+id/checkboxIsEmployed"
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchEmployed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="אני מועסק כרגע"
         android:textSize="16sp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="12dp" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchLookingForJob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="אני עדיין פתוח להצעות עבודה"
+        android:textSize="16sp"
+        android:visibility="gone"
         android:layout_marginBottom="10dp" />
+
 </LinearLayout>

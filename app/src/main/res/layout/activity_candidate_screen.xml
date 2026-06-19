@@ -108,6 +108,21 @@
         app:layout_constraintTop_toBottomOf="@+id/cardDetails" />
 
     <Button
+        android:id="@+id/btnInviteCandidate"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="#4CAF50"
+        android:text="שלח זימון למועמד זה"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnRecruit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
         android:id="@+id/btnRecruit"
         android:layout_width="match_parent"
         android:layout_height="60dp"

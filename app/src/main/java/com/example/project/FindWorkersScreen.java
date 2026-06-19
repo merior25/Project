@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.project.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -38,15 +37,16 @@ public class FindWorkersScreen extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        // 2. קישור המשתנים לעיצוב (לפי ה-IDs שנתת ב-XML)
+        // 2. קישור המשתנים לעיצוב
         spinnerJobType = findViewById(R.id.spinner);
         editNumWorkers = findViewById(R.id.editTextNumberDecimal);
         editRequirements = findViewById(R.id.editTextTextMultiLine);
-        buttonSubmit = findViewById(R.id.buttonSubmit); // הכפתור שהוספנו
+        buttonSubmit = findViewById(R.id.buttonSubmit);
 
-        // 3. מילוי ה-Spinner (התפריט הנפתח) ברשימת תפקידים
-        String[] jobCategories = {"בחר תפקיד...", "מלצרות", "ברמנים", "טבחים", "אבטחה", "ניקיון", "מכירות", "אחר"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, jobCategories);
+        // 3. מילוי ה-Spinner מתוך קובץ ה-strings.xml (מעודכן ל-shared_job_fields)
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.shared_job_fields, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerJobType.setAdapter(adapter);
 
         // 4. מה קורה כשלוחצים על הכפתור?
@@ -59,8 +59,8 @@ public class FindWorkersScreen extends AppCompatActivity {
         String numWorkers = editNumWorkers.getText().toString().trim();
         String requirements = editRequirements.getText().toString().trim();
 
-        // בדיקה שהמשתמש לא השאיר שדות ריקים
-        if (selectedJob.equals("בחר תפקיד...") || numWorkers.isEmpty() || requirements.isEmpty()) {
+        // בדיקה שהמשתמש לא השאיר שדות ריקים (בודקים אם המיקום הוא 0, שזה פריט החובה הראשון)
+        if (spinnerJobType.getSelectedItemPosition() == 0 || numWorkers.isEmpty() || requirements.isEmpty()) {
             Toast.makeText(this, "נא למלא את כל השדות ולבחור תפקיד", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -71,12 +71,12 @@ public class FindWorkersScreen extends AppCompatActivity {
         jobPost.put("numberOfWorkers", numWorkers);
         jobPost.put("requirements", requirements);
 
-        // נשמור גם מי המעסיק שפרסם את זה (כדי שנדע לשייך את המשרה אליו)
+        // נשמור גם מי המעסיק שפרסם את זה
         if (mAuth.getCurrentUser() != null) {
             jobPost.put("employerId", mAuth.getCurrentUser().getUid());
         }
 
-        // שמירה במסד הנתונים באוסף חדש בשם "JobPosts"
+        // שמירה במסד הנתונים
         db.collection("JobPosts")
                 .add(jobPost)
                 .addOnSuccessListener(documentReference -> {

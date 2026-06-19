@@ -6,88 +6,111 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:layoutDirection="rtl"
-    android:background="#EBF5FB"> <TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="לוח גיוס עובדים"
-    android:textSize="28sp"
-    android:textStyle="bold"
-    android:textColor="#111827"
-    android:layout_marginTop="16dp"
-    android:layout_marginBottom="24dp"
-    android:gravity="center" />
+    android:background="#EBF5FB">
 
-    <ListView
-        android:id="@+id/workersListView"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="לוח גיוס עובדים"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#111827"
+        android:layout_marginBottom="8dp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tvRecruitProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E8F5E9"
+        android:padding="12dp"
+        android:textColor="#2E7D32"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginBottom="12dp"
+        android:text="טוען התקדמות גיוס..." />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnScheduledInterviews"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="55dp"
+            android:text="ראיונות"
+            android:layout_marginEnd="4dp"
+            app:backgroundTint="#4CAF50"
+            app:cornerRadius="12dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnInbox"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="55dp"
+            android:text="זימונים"
+            android:layout_marginStart="4dp"
+            app:backgroundTint="#2196F3"
+            app:cornerRadius="12dp" />
+    </LinearLayout>
+
+    <!-- מכולה לרשימות כדי למנוע הסתרה של כפתור הסגירה -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@drawable/input_bg_solid"
-        android:elevation="2dp"
-        android:divider="#E5E7EB"
-        android:dividerHeight="1dp"
-        android:padding="8dp"
-        android:layout_marginBottom="20dp" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/foundWorkerStatus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/input_bg_solid"
-        android:elevation="1dp"
-        android:padding="12dp"
-        android:textColor="#374151"
-        android:textSize="15sp"
-        android:gravity="right"
-        android:layout_marginBottom="8dp"
-        android:text="סטטוס עובדים שנמצאו" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="מועמדים פוטנציאליים:"
+            android:textColor="#333333"
+            android:layout_marginBottom="4dp"/>
 
-    <TextView
-        android:id="@+id/candidateStatus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/input_bg_solid"
-        android:elevation="1dp"
-        android:padding="12dp"
-        android:textColor="#374151"
-        android:textSize="15sp"
-        android:gravity="right"
-        android:layout_marginBottom="8dp"
-        android:text="סטטוס מועמדים" />
+        <ListView
+            android:id="@+id/workersListView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:elevation="2dp"
+            android:divider="#E5E7EB"
+            android:dividerHeight="1dp"
+            android:layout_marginBottom="12dp" />
 
-    <TextView
-        android:id="@+id/recruitStatus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/input_bg_solid"
-        android:elevation="1dp"
-        android:padding="12dp"
-        android:textColor="#374151"
-        android:textSize="15sp"
-        android:gravity="right"
-        android:layout_marginBottom="24dp"
-        android:text="סטטוס גיוס כללי" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="עובדים שהתקבלו:"
+            android:textColor="#333333"
+            android:layout_marginBottom="4dp"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnEdit"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="עריכת הגיוס"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="#111827"
-        app:cornerRadius="30dp"
-        android:layout_marginBottom="12dp" />
+        <ListView
+            android:id="@+id/hiredListView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#F8F9FA"
+            android:elevation="2dp"
+            android:divider="#E5E7EB"
+            android:dividerHeight="1dp"
+            android:layout_marginBottom="12dp" />
+    </LinearLayout>
 
+    <!-- הכפתור התחתון תמיד יישאר על המסך -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnClose"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="סגירת הגיוס"
-        android:textSize="18sp"
+        android:layout_height="55dp"
+        android:text="סגירת הגיוס ומעבר לעריכה"
+        android:textSize="16sp"
         android:textColor="#FFFFFF"
         app:backgroundTint="#374151"
-        app:cornerRadius="30dp"
-        android:layout_marginBottom="16dp" />
+        app:cornerRadius="12dp" />
 
 </LinearLayout>
